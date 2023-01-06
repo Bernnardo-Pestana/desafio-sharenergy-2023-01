@@ -1,5 +1,4 @@
 import Datalist from "../../components/datalist/datalist";
-
 function Cat() {
   const header = [
     {
@@ -41,6 +40,27 @@ function Cat() {
       name:'Jordan',
       email:'jordan@example.com'
     },
+    {
+      id:'1',
+      name:'John',
+      email:'john@example.com'
+    },
+    {
+      id:'2',
+      name:'Mary',
+      email:'mary@example.com'
+    },
+    {
+      id:'3',
+      name:'Ricky',
+      email:'ricky@example.com'
+    },
+    {
+      id:'4',
+      name:'Jordan',
+      email:'jordan@example.com'
+    },
+    
   ]
 
   const options = [

@@ -1,8 +1,21 @@
 import './Datalist.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Pagination from '../pagination/pagination';
+import React, { useState, useMemo } from 'react';
+
+
+let PageSize = 5;
 
 function Datalist({header,data,options}){
+    
+    
+    const [currentPage, setCurrentPage] = useState(1);
 
+    const currentTableData = useMemo(() => {
+      const firstPageIndex = (currentPage - 1) * PageSize;
+      const lastPageIndex = firstPageIndex + PageSize;
+      return data.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage]);
 
     return(
         <div className="flex flex-col">
@@ -26,7 +39,7 @@ function Datalist({header,data,options}){
                             </thead>
                             <tbody>
                                 {
-                                    data.map((data,index2)=>{
+                                    currentTableData.map((data,index2)=>{
                                         return(
                                            <tr key={index2} className='border-b'>
                                             {
@@ -70,8 +83,19 @@ function Datalist({header,data,options}){
                         </table>
                     </div>
                 </div>
+                
+            </div>
+            <div className='flex justify-center'>
+                    <Pagination
+                                    className="pagination-bar"
+                                    currentPage={currentPage}
+                                    totalCount={data.length}
+                                    pageSize={PageSize}
+                                    onPageChange={page => setCurrentPage(page)}
+                    />
             </div>
         </div>
+        
     )
 }
 
