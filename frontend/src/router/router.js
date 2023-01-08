@@ -9,9 +9,9 @@ import Status from '../pages/status/status'
 function MyRouter(){
     return (
         <Routes>
-            <Route path="user" element={<User />} />
+            <Route path="/" element={<User />} />
             <Route path="cat" element={<Cat />} />
-            <Route path="status" element={<Status />} />
+            <Route path="dog" element={<Status />} />
         </Routes>
     )
 }

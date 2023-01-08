@@ -19,6 +19,13 @@ function Sidebar(){
                                 </NavLink>
                             </div>
                             <div>
+
+                                <ul class="mt-6">
+                                    <NavLink to="/">
+                                        <span className='ml-4 text-item'>Home</span>
+                                    </NavLink>
+                                </ul>
+
                                 <ul class="mt-6">
                                     <NavLink to="/cat">
                                         <span className='ml-4 text-item'>Cat</span>
@@ -32,8 +39,8 @@ function Sidebar(){
                                 </ul>
 
                                 <ul class="mt-6">
-                                    <NavLink to="/status">
-                                        <span className='ml-4 text-item'>Status</span>
+                                    <NavLink to="/dog">
+                                        <span className='ml-4 text-item'>Dog</span>
                                     </NavLink>
                                 </ul>
                             </div>

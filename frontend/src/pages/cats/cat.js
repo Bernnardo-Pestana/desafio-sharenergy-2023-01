@@ -63,18 +63,6 @@ function Cat() {
     
   ]
 
-  const options = [
-    {
-      label:'Edit',
-      pen:true
-
-    },
-    {
-      label:'Delete',
-      trash: true
-    }
-  ]
-
     return (
      <div className="">
         <h1 className="text-3xl font-bold underline">
@@ -82,7 +70,7 @@ function Cat() {
         </h1>
 
         <div>
-          <Datalist header={header} data={data} options={options}/>
+          <Datalist header={header} data={data}/>
         </div>
 
      </div>

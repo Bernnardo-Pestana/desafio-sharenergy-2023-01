@@ -3,24 +3,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Pagination from '../pagination/pagination';
 import React, { useState, useMemo } from 'react';
 
+import Seach from '../search/search'
+
 
 let PageSize = 5;
 
 function Datalist({header,data,options}){
-    
+    const [search,setSearch] = useState('');
     
     const [currentPage, setCurrentPage] = useState(1);
 
     const currentTableData = useMemo(() => {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      return data.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
+    
+       
+        let computedData = data;
+        //email,name username
+        if(search){
+            computedData = computedData.filter(
+                dado => dado.name.toLowerCase().includes(search.toLowerCase()) ||  dado.username.toLowerCase().includes(search.toLowerCase()) ||  dado.email.toLowerCase().includes(search.toLowerCase()) 
+            )
+        }
+
+        console.log(computedData)
+        
+
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return computedData.slice(firstPageIndex, lastPageIndex);
+
+     
+    }, [currentPage,search]);
 
     return(
         <div className="flex flex-col">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                    <div>
+                        <Seach 
+                        onSearch={(value)=>{
+                            setSearch(value);
+                            setCurrentPage(1)
+                        }}
+                        
+                        />
+                    </div>
                     <div className="overflow-hidden">
                         <table className="min-w-full">
                             <thead className="border-b">
@@ -45,11 +71,19 @@ function Datalist({header,data,options}){
                                             {
                                                 header.map((item,index)=>{
                                                    if( item.value !== ''){
-                                                    return(
-                                                        <th  className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-left' key={index}>
-                                                            {data[item.value]}
-                                                        </th>
-                                                    )
+                                                        if(item.foto){
+                                                            return(
+                                                                <th  className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-left' key={index}>
+                                                                  <img className="img" src={data[item.value]} />
+                                                                </th>
+                                                            )
+                                                        }else{
+                                                            return(
+                                                                <th  className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-left' key={index}>
+                                                                    {data[item.value]}
+                                                                </th>
+                                                            )
+                                                        }
                                                    }else{
                                                     return(
                                                         <th  className=' flex relative h-full items-end px-4 py-4 text-sm' key={index}>

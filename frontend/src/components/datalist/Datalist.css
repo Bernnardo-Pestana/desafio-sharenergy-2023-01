@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.img {
+    border: 5px solid #ffffff;
+    border-radius: 540px;
+    width: 64px;
+    height: 64px;
+    object-fit:   cover; 
+    object-position: 100% 5;
+  }
