@@ -101,7 +101,7 @@ function Datalist({header,data,setData,options}){
                                                                         if(option.pen){
                                                                             return(
                                                                                <div >
-                                                                                 <FontAwesomeIcon  icon="fa-solid fa-pen" size="xl"  /> 
+                                                                                 <FontAwesomeIcon  icon="fa-solid fa-pen" size="xl"  onClick={()=> option.action(data.id) }/> 
                                                                                 </div>
                                                                             )
                                                                         }
