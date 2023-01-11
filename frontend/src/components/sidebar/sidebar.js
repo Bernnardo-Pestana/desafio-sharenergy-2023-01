@@ -33,8 +33,8 @@ function Sidebar(){
                                 </ul>
 
                                 <ul class="mt-6">
-                                    <NavLink to="/user">
-                                        <span className='ml-4 text-item'>Usuarios</span>
+                                    <NavLink to="/cliente">
+                                        <span className='ml-4 text-item'>Cliente</span>
                                     </NavLink>
                                 </ul>
 

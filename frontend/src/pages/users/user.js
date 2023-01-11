@@ -6,10 +6,12 @@ import axios from 'axios'
 function User() {
   const [data, setdata] = useState(0);
 
-  useEffect(() => {
-    axios.get("https://randomuser.me/api/?fmt=json&results=45&noinf")
-      .then((response) =>{
-        const aux = response.data.results
+  useEffect( () => {
+    async function fetchData(){
+
+      const response =  await axios.get("https://randomuser.me/api/?fmt=json&results=45&noinf")
+
+      const aux = response.data.results
         const aux2 = aux.map(elemento =>{
           const user = {
             name : elemento.name.first + ' ' + elemento.name.last,
@@ -24,12 +26,9 @@ function User() {
 
         setdata(aux2)
 
-        console.log(aux)
 
-      })
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
+    }
+    fetchData();
   }, []);
   
   const Hearder = [
@@ -67,7 +66,7 @@ function User() {
         </div>
         <hr classname="my-6"/>
         <div className="card">
-          <Datalist  header={Hearder} data={data}/>
+         { data &&  <Datalist  header={Hearder} data={data}/>}
         </div>
      </div>
     );

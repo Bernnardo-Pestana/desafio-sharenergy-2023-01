@@ -1,50 +1,58 @@
 import './Datalist.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Pagination from '../pagination/pagination';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo ,useEffect} from 'react';
 
-import Seach from '../search/search'
+import Search from '../search/search'
 
 
 let PageSize = 5;
 
-function Datalist({header,data,options}){
+function Datalist({header,data,setData,options}){
+
     const [search,setSearch] = useState('');
     
     const [currentPage, setCurrentPage] = useState(1);
+
+
 
     const currentTableData = useMemo(() => {
     
        
         let computedData = data;
-        //email,name username
         if(search){
             computedData = computedData.filter(
                 dado => dado.name.toLowerCase().includes(search.toLowerCase()) ||  dado.username.toLowerCase().includes(search.toLowerCase()) ||  dado.email.toLowerCase().includes(search.toLowerCase()) 
             )
         }
-
-        console.log(computedData)
-        
+      
 
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return computedData.slice(firstPageIndex, lastPageIndex);
 
      
-    }, [currentPage,search]);
+    }, [currentPage,search,data]);
+
+    useEffect(() => {
+
+        console.log(data)
+    }, [data]);
+
+
+
+    
 
     return(
         <div className="flex flex-col">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div>
-                        <Seach 
-                        onSearch={(value)=>{
-                            setSearch(value);
-                            setCurrentPage(1)
-                        }}
-                        
+                        <Search 
+                            onSearch={(value)=>{
+                                setSearch(value);
+                                setCurrentPage(1)
+                            }}
                         />
                     </div>
                     <div className="overflow-hidden">
@@ -92,12 +100,14 @@ function Datalist({header,data,options}){
                                                                     options.map((option,index)=>{
                                                                         if(option.pen){
                                                                             return(
-                                                                                <FontAwesomeIcon  icon="fa-solid fa-pen" size="xl"/> 
+                                                                               <div >
+                                                                                 <FontAwesomeIcon  icon="fa-solid fa-pen" size="xl"  /> 
+                                                                                </div>
                                                                             )
                                                                         }
                                                                         if(option.trash){
                                                                             return(
-                                                                                <FontAwesomeIcon icon="fa-solid fa-trash" size="xl"/>
+                                                                                <FontAwesomeIcon icon="fa-solid fa-trash" size="xl" onClick={()=> option.action(data.id) }/>
                                                                             )
                                                                         }
                                                                     })
