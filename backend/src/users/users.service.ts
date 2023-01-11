@@ -30,14 +30,33 @@ export class UsersService {
   }
 
   async findOne(id: any) {
-    return await this.userRepository.findOne(id);
+    try {
+      return await this.userRepository.findOne(id);
+    } catch (error) {
+      console.log(error)
+    }
+
+    
   }
 
-  async  update(id: any, updateUserDto: UpdateUserDto) {
-    return await this.userRepository.update(id, updateUserDto);
+  async  update(id: any, updateUserDto: any) {
+    try {
+
+      const response = await this.userRepository.update(id, updateUserDto);
+      return response
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  async remove(id: number) {
+  async remove(id: any) {
+   try {
+
+
+
     return await this.userRepository.delete(id);
+   } catch (error) {
+    console.log(error)
+   }
   }
 }
