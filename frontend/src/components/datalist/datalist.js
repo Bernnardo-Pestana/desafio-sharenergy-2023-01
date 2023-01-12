@@ -20,28 +20,40 @@ function Datalist({header,data,setData,options}){
     
        
         let computedData = data;
+        let computedData2= [];
         if(search){
-            computedData = computedData.filter(
-                dado => dado.name.toLowerCase().includes(search.toLowerCase()) ||  dado.username.toLowerCase().includes(search.toLowerCase()) ||  dado.email.toLowerCase().includes(search.toLowerCase()) 
-            )
-        }
-      
+            computedData.map((item,index)=>{
+                Object.entries(item).map((elemento)=>{
+                    if(!computedData2.includes(computedData[index])){
+                        if(String(elemento[0]).toLowerCase() === search.toLowerCase()){
+                            computedData2.unshift(computedData[index]);
+                        }else{
+                            if(
+                            String(elemento[1]).toLowerCase().includes(search.toLowerCase())
+                            ){
+                                computedData2.push(computedData[index])
+                            }
+                        }
+                    }
+                })
+            })
+            
+            console.log(computedData2)
+            const firstPageIndex = (currentPage - 1) * PageSize;
+            const lastPageIndex = firstPageIndex + PageSize;
+            return computedData2.slice(firstPageIndex, lastPageIndex);
+            
 
+        }
+        console.log(computedData2)
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return computedData.slice(firstPageIndex, lastPageIndex);
 
+
      
     }, [currentPage,search,data]);
-
-    useEffect(() => {
-
-        console.log(data)
-    }, [data]);
-
-
-
-    
+   
 
     return(
         <div className="flex flex-col">

@@ -11,7 +11,7 @@ function Sidebar(){
                     <div className='text-gray-500 bar dark:text-gray-400 h-full flex flex-col justify-between'>
                         <div >
                             <div className="text-lg logo flex justify-center items-center font-bold text-gray-200 dark:text-gray-200">
-                                <NavLink to="/cliente">
+                                <NavLink to="/">
                                     <img
                                         src={logo}
                                         alt="example"
@@ -21,7 +21,7 @@ function Sidebar(){
                             <div>
 
                                 <ul class="mt-6">
-                                    <NavLink to="/cliente">
+                                    <NavLink to="/">
                                         <span className='ml-4 text-item'>Home</span>
                                     </NavLink>
                                 </ul>
